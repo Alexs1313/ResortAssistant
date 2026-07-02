@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {
   ImageBackground,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -40,44 +41,51 @@ export function OnboardingScreen() {
       style={styles.OnboardingScreenChassis}
       resizeMode="cover"
     >
-      <View
-        style={[
-          styles.OnboardingScreenSkipRow,
-          { paddingTop: insets.top + 16 },
-        ]}
+      <ScrollView
+        contentContainerStyle={{ flexGrow: 1 }}
+        showsVerticalScrollIndicator={false}
       >
-        <View />
-        {!isLast && (
-          <TouchableOpacity onPress={goToMain} activeOpacity={0.75}>
-            <Text style={styles.OnboardingScreenSkipText}>Skip</Text>
-          </TouchableOpacity>
-        )}
-      </View>
-
-      <View style={styles.OnboardingScreenIllustration}>
-        <View style={[styles.OnboardingScreenIllustrationRing, { width: scale(180), height: scale(180), borderRadius: scale(90) }]}>
-          <Text style={[styles.OnboardingScreenEmoji, { fontSize: scale(72) }]}>{current.emoji}</Text>
+        <View
+          style={[
+            styles.OnboardingScreenSkipRow,
+            { paddingTop: insets.top + 16 },
+          ]}
+        >
+          <View />
+          {!isLast && (
+            <TouchableOpacity onPress={goToMain} activeOpacity={0.75}>
+              <Text style={styles.OnboardingScreenSkipText}>Skip</Text>
+            </TouchableOpacity>
+          )}
         </View>
-      </View>
 
-      <View style={styles.OnboardingScreenContent}>
-        <Text style={styles.OnboardingScreenTitle}>{current.title}</Text>
-        <Text style={styles.OnboardingScreenSubtitle}>{current.subtitle}</Text>
-      </View>
+        <View style={styles.OnboardingScreenIllustration}>
+          <View style={[styles.OnboardingScreenIllustrationRing]}>
+            <Text style={[styles.OnboardingScreenEmoji]}>{current.emoji}</Text>
+          </View>
+        </View>
 
-      <View
-        style={[
-          styles.OnboardingScreenBottom,
-          { paddingBottom: insets.bottom + spacing.xl },
-        ]}
-      >
-        <PaginationDots total={onboardingData.length} current={page} />
-        <PrimaryButton
-          label={isLast ? 'Enter App' : 'Next'}
-          onPress={goNext}
-          style={styles.OnboardingScreenBtn}
-        />
-      </View>
+        <View style={styles.OnboardingScreenContent}>
+          <Text style={styles.OnboardingScreenTitle}>{current.title}</Text>
+          <Text style={styles.OnboardingScreenSubtitle}>
+            {current.subtitle}
+          </Text>
+        </View>
+
+        <View
+          style={[
+            styles.OnboardingScreenBottom,
+            { paddingBottom: insets.bottom + spacing.xl },
+          ]}
+        >
+          <PaginationDots total={onboardingData.length} current={page} />
+          <PrimaryButton
+            label={isLast ? 'Enter App' : 'Next'}
+            onPress={goNext}
+            style={styles.OnboardingScreenBtn}
+          />
+        </View>
+      </ScrollView>
     </ImageBackground>
   );
 }
@@ -112,6 +120,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: 90,
   },
 
   OnboardingScreenIllustrationRing: {

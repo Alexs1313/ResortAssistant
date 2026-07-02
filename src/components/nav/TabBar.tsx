@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { GuestTab } from '../../navigation/types';
 import { useAppNavigation } from '../../navigation/NavigationContext';
@@ -85,16 +85,20 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     paddingVertical: 4,
+    borderRadius: 20,
   },
   TabBarIconWrap: {
     width: 44,
     height: 30,
-    borderRadius: 10,
+
     alignItems: 'center',
     justifyContent: 'center',
+    borderRadius: 10,
+    overflow: 'hidden',
   },
   TabBarIconWrapActive: {
     backgroundColor: `${colors.primaryGold}22`,
+    ...(Platform.OS === 'android' && { borderRadius: 20 }),
   },
   TabBarEmoji: {
     fontSize: 20,

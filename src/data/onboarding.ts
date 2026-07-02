@@ -1,8 +1,8 @@
-import {OnboardingPage} from '../types';
+import { OnboardingPage } from '../types';
 
 export const onboardingData: OnboardingPage[] = [
   {
-    title: 'Welcome to Total Casino',
+    title: 'Welcome to Total Resort Assistant',
     subtitle:
       'Access your reservation details, room number, stay dates, and booking code in one premium guest app.',
     emoji: '🏨',
@@ -25,7 +25,7 @@ export const onboardingData: OnboardingPage[] = [
   {
     title: 'Explore Nearby Places',
     subtitle:
-      'Discover local attractions, save places you want to visit, and open directions in Apple Maps or Google Maps.',
+      'Discover local attractions, save places you want to visit, and open directions in Google Maps.',
     emoji: '🗺',
     bgImage: 'onboardBg4',
   },

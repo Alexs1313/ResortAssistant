@@ -3,6 +3,7 @@ import {
   Animated,
   Image,
   ImageBackground,
+  ScrollView,
   StyleSheet,
   Text,
   View,
@@ -63,34 +64,51 @@ export function LoaderScreen() {
       style={styles.LoaderScreenChassis}
       resizeMode="cover"
     >
-      <Image
-        source={images.loaderIcon}
-        style={[styles.LoaderScreenIcon, { width: 280, height: 280 }]}
-        resizeMode="contain"
-      />
-
-      <Animated.View
-        style={{ opacity, alignItems: 'center', marginTop: spacing.xxl }}
+      <ScrollView
+        contentContainerStyle={{
+          flexGrow: 1,
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+        showsVerticalScrollIndicator={false}
       >
-        <Text style={styles.LoaderScreenTitle}>TOTAL CASINO</Text>
-        <Text style={styles.LoaderScreenSubtitle}>HOTEL & RESORT</Text>
-      </Animated.View>
+        <Image
+          source={images.loaderIcon}
+          style={[styles.LoaderScreenIcon, { width: 280, height: 280 }]}
+          resizeMode="contain"
+        />
 
-      <Animated.View
-        style={[
-          styles.LoaderScreenProgressWrap,
-          { opacity, bottom: verticalScale(80) },
-        ]}
-      >
-        <View style={[styles.LoaderScreenProgressTrack, { width: scale(160) }]}>
-          <Animated.View
-            style={[styles.LoaderScreenProgressBar, { width: barWidth }]}
-          />
-        </View>
-        <Text style={styles.LoaderScreenProgressLabel}>
-          Loading your experience...
-        </Text>
-      </Animated.View>
+        <Animated.View
+          style={{
+            opacity,
+            alignItems: 'center',
+            marginTop: 30,
+            marginBottom: 100,
+          }}
+        >
+          <Text style={styles.LoaderScreenTitle}>TOTAL RESORT</Text>
+          <Text style={styles.LoaderScreenSubtitle}>ASSISTANT</Text>
+        </Animated.View>
+
+        <Animated.View
+          style={[
+            styles.LoaderScreenProgressWrap,
+            { opacity, bottom: verticalScale(80) },
+          ]}
+        >
+          <View
+            style={[styles.LoaderScreenProgressTrack, { width: scale(160) }]}
+          >
+            <Animated.View
+              style={[styles.LoaderScreenProgressBar, { width: barWidth }]}
+            />
+          </View>
+          <Text style={styles.LoaderScreenProgressLabel}>
+            Loading your experience...
+          </Text>
+        </Animated.View>
+      </ScrollView>
     </ImageBackground>
   );
 }
@@ -152,6 +170,7 @@ const styles = StyleSheet.create({
   LoaderScreenIcon: {
     width: 290,
     height: 290,
+    borderRadius: 50,
   },
   LoaderScreenTitle: {
     fontSize: 22,
@@ -168,7 +187,7 @@ const styles = StyleSheet.create({
   },
   LoaderScreenProgressWrap: {
     position: 'absolute',
-    bottom: 80,
+    bottom: 30,
     alignItems: 'center',
     gap: 10,
   },
@@ -188,5 +207,6 @@ const styles = StyleSheet.create({
   LoaderScreenProgressLabel: {
     fontSize: fontSize.caption,
     color: colors.mutedText,
+    textAlign: 'center',
   },
 });

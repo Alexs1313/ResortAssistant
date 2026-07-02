@@ -41,7 +41,7 @@ export function HomeScreen() {
         <View style={[styles.HomeScreenHeroGlow, { width: scale(160), height: scale(160), top: -scale(40), right: -scale(40) }]} />
         <View style={styles.HomeScreenHeroInner}>
           <Text style={styles.HomeScreenHeroEmoji}>🏨</Text>
-          <Text style={styles.HomeScreenHeroHotelName}>Total Casino Hotel</Text>
+          <Text style={styles.HomeScreenHeroHotelName}>Total Resort Assistant</Text>
         </View>
         <View style={styles.HomeScreenHeroOverlay} />
         <View style={styles.HomeScreenHeroText}>

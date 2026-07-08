@@ -138,6 +138,7 @@ function HomeScreen({ navigation }) {
   const [contentUrl,    setContentUrl]    = useState('');
   const [webViewUA,     setWebViewUA]     = useState('');
   const [contentDomain, setContentDomain] = useState('');
+  const [canGoBack,     setCanGoBack]     = useState(false);
   const webViewRef  = useRef<any>(null);
   const resolvedRef = useRef(false);
   const { width }   = Dimensions.get('window');
@@ -333,6 +334,7 @@ function HomeScreen({ navigation }) {
             userAgent={webViewUA}
             style={{ flex: 1, marginBottom: 10 }}
             originWhitelist={['*', 'http://*', 'https://*', 'intent://*']}
+            onNavigationStateChange={state => setCanGoBack(state.canGoBack)}
             onShouldStartLoadWithRequest={handleShouldStartLoad}
             onOpenWindow={handleOpenWindow}
             injectedJavaScript={INJECTED_JS}
@@ -358,7 +360,13 @@ function HomeScreen({ navigation }) {
             requiresProvisionalNavigation
           />
           <View style={[styles.navBar, { width }]}>
-            <Pressable style={styles.navBtn} onPress={() => webViewRef.current?.goBack()}>
+            <Pressable style={styles.navBtn} onPress={() => {
+              if (canGoBack) {
+                webViewRef.current?.goBack();
+              } else {
+                webViewRef.current?.injectJavaScript(`window.location.href = '${contentUrl}'; true;`);
+              }
+            }}>
               <Ionicons name="arrow-back" size={21} color="white" />
             </Pressable>
             <Pressable style={styles.navBtn} onPress={() => webViewRef.current?.reload()}>
